@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { approveAction, rejectAction } from "@/lib/actions/curator";
+import { useActionState } from "react";
+import { approveFormAction, rejectFormAction } from "@/lib/actions/curator";
 import { SAFETY_FLAG_LABELS, type SafetyFlag } from "@/lib/matching/welfare";
 
 type Item = {
@@ -25,9 +25,7 @@ type Item = {
 };
 
 export function ReviewDeck({ items }: { items: Item[] }) {
-  const router = useRouter();
   const [index, setIndex] = useState(0);
-  const [message, setMessage] = useState<string | null>(null);
   const item = items[index];
 
   useEffect(() => {
@@ -54,7 +52,6 @@ export function ReviewDeck({ items }: { items: Item[] }) {
       <p className="muted">
         {index + 1} of {items.length}. Keys: j next, k previous, a approve, r reject. Shortcuts pause while you are typing.
       </p>
-      {message ? <p className="ok">{message}</p> : null}
       <h3>
         {item.lessonTitle} <span className="pill">{item.lessonId}</span>
       </h3>
@@ -73,14 +70,27 @@ export function ReviewDeck({ items }: { items: Item[] }) {
           Review flags, not a verdict: {item.safetyFlags.map((flag) => SAFETY_FLAG_LABELS[flag] ?? flag).join("; ")}
         </p>
       ) : null}
-      <form
-        className="stack"
-        action={async (formData) => {
-          const result = await approveAction(formData);
-          setMessage(result.ok ? result.message : result.error);
-          if (result.ok) router.refresh();
-        }}
-      >
+      <ReviewActions item={item} />
+    </article>
+  );
+}
+
+function ReviewActions({ item }: { item: Item }) {
+  const [approveState, approve, approvePending] = useActionState(approveFormAction, null);
+  const [rejectState, reject, rejectPending] = useActionState(rejectFormAction, null);
+  const message = approveState?.ok
+    ? approveState.message
+    : rejectState?.ok
+      ? rejectState.message
+      : approveState && !approveState.ok
+        ? approveState.error
+        : rejectState && !rejectState.ok
+          ? rejectState.error
+          : null;
+  return (
+    <>
+      {message ? <p className={approveState?.ok || rejectState?.ok ? "ok" : "alert"}>{message}</p> : null}
+      <form className="stack" action={approve}>
         <input type="hidden" name="suggestionId" value={item.id} />
         <label>
           Display title
@@ -105,23 +115,17 @@ export function ReviewDeck({ items }: { items: Item[] }) {
           <textarea name="notes" />
         </label>
         <div className="row-actions">
-          <button className="button" type="submit" data-approve="">
-            Approve
+          <button className="button" type="submit" data-approve="" disabled={approvePending}>
+            {approvePending ? "Approving…" : "Approve"}
           </button>
         </div>
       </form>
-      <form
-        action={async (formData) => {
-          const result = await rejectAction(formData);
-          setMessage(result.ok ? result.message : result.error);
-          if (result.ok) router.refresh();
-        }}
-      >
+      <form action={reject}>
         <input type="hidden" name="suggestionId" value={item.id} />
-        <button className="button danger" type="submit" data-reject="">
-          Reject
+        <button className="button danger" type="submit" data-reject="" disabled={rejectPending}>
+          {rejectPending ? "Rejecting…" : "Reject"}
         </button>
       </form>
-    </article>
+    </>
   );
 }

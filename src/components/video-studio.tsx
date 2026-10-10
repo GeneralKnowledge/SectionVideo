@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState, useMemo, useState } from "react";
 import {
   addChapterAction,
-  approveAction,
+  approveFormAction,
   manualMapAction,
-  rejectAction,
+  rejectFormAction,
   saveTranscriptAction,
-  suggestAction,
-  type ActionResult,
+  suggestFormAction,
 } from "@/lib/actions/curator";
 import { SAFETY_FLAG_LABELS, type SafetyFlag } from "@/lib/matching/welfare";
 import { buildEmbedUrl, canonicalWatchUrl } from "@/lib/youtube/embed";
@@ -74,17 +72,20 @@ export function VideoStudio({
   suggestions: SuggestionView[];
   lessons: LessonOption[];
 }) {
-  const router = useRouter();
   const initial = suggestions.find((item) => item.timingGrounded) ?? suggestions[0];
+  const suggestionKey = `${initial?.id ?? ""}:${initial?.startSeconds ?? ""}:${initial?.endSeconds ?? ""}`;
+  const [syncedKey, setSyncedKey] = useState(suggestionKey);
   const [start, setStart] = useState(initial?.startSeconds ?? 0);
   const [end, setEnd] = useState<number | "">(initial?.endSeconds ?? "");
-  const [notice, setNotice] = useState<ActionResult | null>(null);
   const [lessonQuery, setLessonQuery] = useState("");
+  const [manualState, manualAction, manualPending] = useActionState(manualMapAction, null);
+  const [chapterState, chapterAction, chapterPending] = useActionState(addChapterAction, null);
 
-  useEffect(() => {
-    if (initial?.startSeconds != null) setStart(initial.startSeconds);
-    if (initial?.endSeconds != null) setEnd(initial.endSeconds);
-  }, [initial?.id, initial?.startSeconds, initial?.endSeconds]);
+  if (syncedKey !== suggestionKey) {
+    setSyncedKey(suggestionKey);
+    setStart(initial?.startSeconds ?? 0);
+    setEnd(initial?.endSeconds ?? "");
+  }
   const filteredLessons = useMemo(() => {
     const needle = lessonQuery.trim().toLowerCase();
     return lessons
@@ -113,12 +114,6 @@ export function VideoStudio({
     : null;
   const watchUrl = canonicalWatchUrl(video.youtubeVideoId, start);
 
-  async function run(result: Promise<ActionResult>) {
-    const next = await result;
-    setNotice(next);
-    if (next.ok) router.refresh();
-  }
-
   return (
     <div className="stack">
       <div className="pills">
@@ -133,7 +128,6 @@ export function VideoStudio({
         <p className="note">This is labelled fixture data. The player URL is well formed, but the video ID is not a real YouTube video.</p>
       ) : null}
       {video.retrievalError ? <p className="note">{video.retrievalError}</p> : null}
-      {notice ? <p className={notice.ok ? "ok" : "alert"}>{notice.ok ? notice.message : notice.error}</p> : null}
       <div className="studio">
         <div className="stack">
           <div className="player">
@@ -169,12 +163,7 @@ export function VideoStudio({
           </p>
           <section className="panel stack">
             <h3>Manual lesson mapping</h3>
-            <form
-              className="stack"
-              action={async (formData) => {
-                await run(manualMapAction(null, formData));
-              }}
-            >
+            <form className="stack" action={manualAction}>
               <input type="hidden" name="videoId" value={video.id} />
               <label>
                 Find a Good Dog lesson
@@ -209,8 +198,11 @@ export function VideoStudio({
                 Curator note
                 <textarea name="note" placeholder="What should the viewer watch for?" />
               </label>
-              <button className="button" type="submit">
-                Add manual mapping
+              {manualState ? (
+                <p className={manualState.ok ? "ok" : "alert"}>{manualState.ok ? manualState.message : manualState.error}</p>
+              ) : null}
+              <button className="button" type="submit" disabled={manualPending}>
+                {manualPending ? "Adding…" : "Add manual mapping"}
               </button>
             </form>
           </section>
@@ -236,12 +228,7 @@ export function VideoStudio({
                 </span>
               </button>
             ))}
-            <form
-              className="stack"
-              action={async (formData) => {
-                await run(addChapterAction(null, formData));
-              }}
-            >
+            <form className="stack" action={chapterAction}>
               <input type="hidden" name="videoId" value={video.id} />
               <label>
                 Chapter title
@@ -251,8 +238,11 @@ export function VideoStudio({
                 Start seconds
                 <input name="start" inputMode="numeric" />
               </label>
-              <button className="button secondary" type="submit">
-                Add chapter
+              {chapterState ? (
+                <p className={chapterState.ok ? "ok" : "alert"}>{chapterState.ok ? chapterState.message : chapterState.error}</p>
+              ) : null}
+              <button className="button secondary" type="submit" disabled={chapterPending}>
+                {chapterPending ? "Adding…" : "Add chapter"}
               </button>
             </form>
           </section>
@@ -276,39 +266,14 @@ export function VideoStudio({
                 </button>
               ))}
             </div>
-            <form
-              className="stack"
-              action={async (formData) => {
-                await run(saveTranscriptAction(null, formData));
-              }}
-            >
-              <input type="hidden" name="videoId" value={video.id} />
-              <label>
-                VTT or SRT file
-                <input name="file" type="file" accept=".vtt,.srt,text/vtt,application/x-subrip" data-testid="transcript-file" />
-              </label>
-              <label>
-                Or paste cues
-                <textarea name="transcript" data-testid="transcript-text" placeholder="WEBVTT" />
-              </label>
-              <button className="button secondary" type="submit">
-                Save transcript
-              </button>
-            </form>
+            <TranscriptForm videoId={video.id} />
           </section>
         </div>
       </div>
       <section className="panel stack">
         <div className="row-actions">
           <h3 style={{ margin: 0 }}>Suggested lessons</h3>
-          <button
-            className="button"
-            type="button"
-            data-testid="suggest-matches"
-            onClick={() => run(suggestAction(video.id))}
-          >
-            Suggest matches
-          </button>
+          <SuggestForm videoId={video.id} />
         </div>
         <p className="muted">Approval is always a human action. Model output is discarded when the timestamps or lesson IDs do not match stored evidence.</p>
         {suggestions.length === 0 ? <p>No suggestions yet.</p> : null}
@@ -335,62 +300,14 @@ export function VideoStudio({
                 {suggestion.safetyFlags.map((flag) => SAFETY_FLAG_LABELS[flag] ?? flag).join("; ")}
               </p>
             ) : null}
-            <form
-              className="stack"
-              action={async (formData) => {
-                await run(approveAction(formData));
-              }}
-            >
-              <input type="hidden" name="suggestionId" value={suggestion.id} />
-              <label>
-                Display title
-                <input name="title" defaultValue={suggestion.lessonTitle} />
-              </label>
-              <div className="row-actions">
-                <label>
-                  Start seconds
-                  <input
-                    name="start"
-                    data-testid="start-seconds"
-                    inputMode="numeric"
-                    defaultValue={suggestion.startSeconds ?? start}
-                    onChange={(event) => setStart(Number(event.target.value || 0))}
-                  />
-                </label>
-                <label>
-                  End seconds
-                  <input
-                    name="end"
-                    data-testid="end-seconds"
-                    inputMode="numeric"
-                    defaultValue={suggestion.endSeconds ?? ""}
-                    onChange={(event) => setEnd(event.target.value === "" ? "" : Number(event.target.value))}
-                  />
-                </label>
-              </div>
-              <label>
-                Viewing instructions
-                <textarea
-                  name="instructions"
-                  defaultValue="Observe the handler’s timing and how the reward follows the behaviour."
-                />
-              </label>
-              <label>
-                Curator notes
-                <textarea name="notes" />
-              </label>
-              <div className="row-actions">
-                <button className="button" type="submit" data-testid="approve-suggestion">
-                  Approve
-                </button>
-              </div>
-            </form>
-            <form action={async (formData) => run(rejectAction(formData))}>
-              <input type="hidden" name="suggestionId" value={suggestion.id} />
-              <button className="button danger" type="submit">
-                Reject
-              </button>
-            </form>
+            <DecisionForms
+              suggestionId={suggestion.id}
+              lessonTitle={suggestion.lessonTitle}
+              startSeconds={suggestion.startSeconds ?? start}
+              endSeconds={suggestion.endSeconds}
+              onStartChange={setStart}
+              onEndChange={setEnd}
+            />
           </article>
         ))}
       </section>
@@ -401,5 +318,114 @@ export function VideoStudio({
         </section>
       ) : null}
     </div>
+  );
+}
+
+function SuggestForm({ videoId }: { videoId: string }) {
+  const [state, action, pending] = useActionState(suggestFormAction, null);
+  return (
+    <form action={action}>
+      <input type="hidden" name="videoId" value={videoId} />
+      {state ? <p className={state.ok ? "ok" : "alert"}>{state.ok ? state.message : state.error}</p> : null}
+      <button className="button" type="submit" data-testid="suggest-matches" disabled={pending}>
+        {pending ? "Matching…" : "Suggest matches"}
+      </button>
+    </form>
+  );
+}
+
+function DecisionForms({
+  suggestionId,
+  lessonTitle,
+  startSeconds,
+  endSeconds,
+  onStartChange,
+  onEndChange,
+}: {
+  suggestionId: string;
+  lessonTitle: string;
+  startSeconds: number;
+  endSeconds: number | null;
+  onStartChange: (value: number) => void;
+  onEndChange: (value: number | "") => void;
+}) {
+  const [approveState, approve, approvePending] = useActionState(approveFormAction, null);
+  const [rejectState, reject, rejectPending] = useActionState(rejectFormAction, null);
+  return (
+    <>
+      <form className="stack" action={approve}>
+        <input type="hidden" name="suggestionId" value={suggestionId} />
+        <label>
+          Display title
+          <input name="title" defaultValue={lessonTitle} />
+        </label>
+        <div className="row-actions">
+          <label>
+            Start seconds
+            <input
+              name="start"
+              data-testid="start-seconds"
+              inputMode="numeric"
+              defaultValue={startSeconds}
+              onChange={(event) => onStartChange(Number(event.target.value || 0))}
+            />
+          </label>
+          <label>
+            End seconds
+            <input
+              name="end"
+              data-testid="end-seconds"
+              inputMode="numeric"
+              defaultValue={endSeconds ?? ""}
+              onChange={(event) => onEndChange(event.target.value === "" ? "" : Number(event.target.value))}
+            />
+          </label>
+        </div>
+        <label>
+          Viewing instructions
+          <textarea name="instructions" defaultValue="Observe the handler’s timing and how the reward follows the behaviour." />
+        </label>
+        <label>
+          Curator notes
+          <textarea name="notes" />
+        </label>
+        {approveState ? (
+          <p className={approveState.ok ? "ok" : "alert"}>{approveState.ok ? approveState.message : approveState.error}</p>
+        ) : null}
+        <div className="row-actions">
+          <button className="button" type="submit" data-testid="approve-suggestion" disabled={approvePending}>
+            {approvePending ? "Approving…" : "Approve"}
+          </button>
+        </div>
+      </form>
+      <form action={reject}>
+        <input type="hidden" name="suggestionId" value={suggestionId} />
+        {rejectState && !rejectState.ok ? <p className="alert">{rejectState.error}</p> : null}
+        <button className="button danger" type="submit" disabled={rejectPending}>
+          {rejectPending ? "Rejecting…" : "Reject"}
+        </button>
+      </form>
+    </>
+  );
+}
+
+function TranscriptForm({ videoId }: { videoId: string }) {
+  const [state, action, pending] = useActionState(saveTranscriptAction, null);
+  return (
+    <form className="stack" action={action}>
+      <input type="hidden" name="videoId" value={videoId} />
+      <label>
+        VTT or SRT file
+        <input name="file" type="file" accept=".vtt,.srt,text/vtt,application/x-subrip" data-testid="transcript-file" />
+      </label>
+      <label>
+        Or paste cues
+        <textarea name="transcript" data-testid="transcript-text" placeholder="WEBVTT" />
+      </label>
+      {state ? <p className={state.ok ? "ok" : "alert"}>{state.ok ? state.message : state.error}</p> : null}
+      <button className="button secondary" type="submit" disabled={pending}>
+        {pending ? "Saving…" : "Save transcript"}
+      </button>
+    </form>
   );
 }

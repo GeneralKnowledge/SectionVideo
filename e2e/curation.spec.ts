@@ -53,5 +53,5 @@ test("the export route and the desk require a curator", async ({ page, request }
   await page.getByTestId("email").fill("curator@example.com");
   await page.getByTestId("password").fill("not-the-password");
   await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByRole("alert")).toContainText("do not match");
+  await expect(page.locator("form").getByRole("alert")).toContainText("do not match");
 });

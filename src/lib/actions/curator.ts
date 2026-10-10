@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ZodError } from "zod";
@@ -182,6 +183,7 @@ export async function saveTranscriptAction(
     actorId: actor.id,
   });
   if (!result.ok) return result;
+  revalidatePath(`/videos/${videoId}`);
   return { ok: true, message: `Stored ${result.cueCount} transcript cues.` };
 }
 
@@ -201,15 +203,33 @@ export async function addChapterAction(
     actorId: actor.id,
   });
   if (!result.ok) return result;
+  revalidatePath(`/videos/${text(formData, "videoId")}`);
   return { ok: true, message: "Chapter saved." };
 }
 
+export async function suggestFormAction(
+  _state: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  return suggestAction(text(formData, "videoId"));
+}
+
 export async function suggestAction(videoId: string): Promise<ActionResult> {
-  const actor = await requireCurator();
-  const result = await generateSuggestions(getDb(), videoId, actor.id, createOpenAiClient());
-  if (!result.ok) return result;
-  const extra = result.llmNote ? ` ${result.llmNote}` : "";
-  return { ok: true, message: `Prepared ${result.count} suggestion(s).${extra}` };
+  try {
+    const actor = await requireCurator();
+    const result = await generateSuggestions(getDb(), videoId, actor.id, createOpenAiClient());
+    if (!result.ok) return result;
+    const extra = result.llmNote ? ` ${result.llmNote}` : "";
+    revalidatePath(`/videos/${videoId}`);
+    revalidatePath("/review");
+    return { ok: true, message: `Prepared ${result.count} suggestion(s).${extra}` };
+  } catch (error) {
+    console.error("suggestAction failed", error);
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : "Matching failed.",
+    };
+  }
 }
 
 export async function manualMapAction(
@@ -227,7 +247,16 @@ export async function manualMapAction(
     note: text(formData, "note"),
   });
   if (!result.ok) return result;
+  revalidatePath(`/videos/${text(formData, "videoId")}`);
+  revalidatePath("/review");
   return { ok: true, message: "Manual mapping added to the review list." };
+}
+
+export async function approveFormAction(
+  _state: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  return approveAction(formData);
 }
 
 export async function approveAction(formData: FormData): Promise<ActionResult> {
@@ -243,20 +272,42 @@ export async function approveAction(formData: FormData): Promise<ActionResult> {
     curatorNotes: text(formData, "notes"),
   });
   if (!result.ok) return result;
+  revalidatePath("/");
+  revalidatePath("/review");
+  revalidatePath("/export");
+  revalidatePath("/lessons");
   return { ok: true, message: "Segment approved. It can now be exported." };
+}
+
+export async function rejectFormAction(
+  _state: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  return rejectAction(formData);
 }
 
 export async function rejectAction(formData: FormData): Promise<ActionResult> {
   const actor = await requireCurator();
   const result = rejectSuggestion(getDb(), actor, text(formData, "suggestionId"), text(formData, "notes"));
   if (!result.ok) return result;
+  revalidatePath("/");
+  revalidatePath("/review");
+  revalidatePath("/export");
   return { ok: true, message: "Suggestion rejected." };
+}
+
+export async function draftFormAction(formData: FormData): Promise<void> {
+  await draftAction(formData);
 }
 
 export async function draftAction(formData: FormData): Promise<ActionResult> {
   const actor = await requireCurator();
   const result = returnSegmentToDraft(getDb(), actor, text(formData, "segmentId"));
   if (!result.ok) return result;
+  revalidatePath("/");
+  revalidatePath("/review");
+  revalidatePath("/export");
+  revalidatePath("/lessons");
   return { ok: true, message: "Segment returned to draft and removed from the export." };
 }
 

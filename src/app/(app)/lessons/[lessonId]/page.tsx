@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { draftAction } from "@/lib/actions/curator";
+import { draftFormAction } from "@/lib/actions/curator";
 import { StatusPill } from "@/components/pills";
 import { conflictingAliases } from "@/lib/curriculum/snapshot";
 import { loadCurriculumSnapshot } from "@/lib/curriculum/snapshot";
@@ -72,11 +72,7 @@ export default async function LessonPage({ params }: { params: Promise<{ lessonI
                     {segment.endSeconds != null ? `–${formatClock(segment.endSeconds)}` : ""}
                   </div>
                   {segment.publicationStatus !== "draft" ? (
-                    <form
-                      action={async (formData) => {
-                        await draftAction(formData);
-                      }}
-                    >
+                    <form action={draftFormAction}>
                       <input type="hidden" name="segmentId" value={segment.id} />
                       <button className="button secondary" type="submit">
                         Return to draft

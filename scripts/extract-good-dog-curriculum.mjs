@@ -18,7 +18,6 @@ if (!goodDogPath) {
 }
 
 const root = path.resolve(goodDogPath);
-const contentRoot = path.join(root, "src/lib/domains/dog-training");
 
 function read(relativePath) {
   const absolute = path.join(root, relativePath);
