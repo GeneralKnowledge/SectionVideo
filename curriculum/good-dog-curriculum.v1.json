@@ -1,0 +1,2252 @@
+{
+  "schemaVersion": 1,
+  "curriculumVersion": "good-dog@de42e3e226278fc66790a80d85da094579ec1738",
+  "source": {
+    "repository": "https://github.com/GeneralKnowledge/Good-Dog",
+    "commit": "de42e3e226278fc66790a80d85da094579ec1738",
+    "retrievedAt": "2026-10-10T18:26:30.540Z",
+    "files": [
+      "src/lib/domains/dog-training/content/exercises.ts",
+      "src/lib/domains/dog-training/content/learning-objectives.ts",
+      "src/lib/domains/dog-training/kb-crash-course.ts",
+      "src/lib/domains/dog-training/content/kb-import/good-dog-guides.json",
+      "src/lib/domains/dog-training/content/kb-import/good-dog-domain.json",
+      "src/lib/domains/dog-training/content/kb-import/good-dog-crash-course.json",
+      "src/lib/domains/dog-training/content/kb-import/good-dog-safety.json"
+    ]
+  },
+  "identifierNotes": [
+    "Practical lessons in the running Good Dog app use exercises.id values (ex-*) from EXERCISE_LIBRARY. They are stored in the exercises table and opened at /exercise/[exerciseId].",
+    "Knowledge-base guides use lessonId values (lesson-*) from good-dog-guides.json and open at /learn/guides/[lessonId].",
+    "Crash-course entries also use lesson-* identifiers. Skill entries are aliases mapped to exercise ids by LESSON_EXERCISE_MAP in kb-crash-course.ts. They are not a third id space in the database.",
+    "lesson-loose-lead is mapped to ex-lead-intro by LESSON_EXERCISE_MAP and to ex-lead-loose by good-dog-domain.json held[]. Both mappings are copied from those files.",
+    "Some exercise learningObjectiveId values are not defined in LEARNING_OBJECTIVES. They are preserved as used and listed in missingObjectiveDefinitions."
+  ],
+  "learningObjectives": [
+    {
+      "id": "name-response",
+      "label": "Name response",
+      "plainEnglish": "Checking in when they hear their name"
+    },
+    {
+      "id": "engagement",
+      "label": "Engagement",
+      "plainEnglish": "Choosing to pay attention to you"
+    },
+    {
+      "id": "reward-marker",
+      "label": "Reward marker",
+      "plainEnglish": "Understanding your ‘yes’ word"
+    },
+    {
+      "id": "sit",
+      "label": "Sit",
+      "plainEnglish": "Sitting comfortably when asked"
+    },
+    {
+      "id": "wait",
+      "label": "Brief wait",
+      "plainEnglish": "Pausing calmly for a moment"
+    },
+    {
+      "id": "mat-settle",
+      "label": "Mat settling",
+      "plainEnglish": "Settling on a mat"
+    },
+    {
+      "id": "calm-home",
+      "label": "Calm at home",
+      "plainEnglish": "Settling quietly around the house"
+    },
+    {
+      "id": "handling",
+      "label": "Comfortable handling",
+      "plainEnglish": "Being comfortable with gentle touch"
+    },
+    {
+      "id": "recall",
+      "label": "Recall foundations",
+      "plainEnglish": "Coming back when called"
+    },
+    {
+      "id": "lead-walking",
+      "label": "Lead walking",
+      "plainEnglish": "Walking more comfortably on lead"
+    },
+    {
+      "id": "check-in",
+      "label": "Check-ins",
+      "plainEnglish": "Checking in with you on walks"
+    },
+    {
+      "id": "leave-it",
+      "label": "Leave it",
+      "plainEnglish": "Turning away from mildly interesting things"
+    },
+    {
+      "id": "door-manners",
+      "label": "Door manners",
+      "plainEnglish": "Staying calm near doorways"
+    },
+    {
+      "id": "greetings",
+      "label": "Calm greetings",
+      "plainEnglish": "Greeting people more calmly"
+    },
+    {
+      "id": "rest-spot",
+      "label": "Rest spot",
+      "plainEnglish": "Using a quiet rest place"
+    },
+    {
+      "id": "puppy-confidence",
+      "label": "Everyday confidence",
+      "plainEnglish": "Getting used to everyday experiences"
+    },
+    {
+      "id": "hand-target",
+      "label": "Hand touch",
+      "plainEnglish": "Touching your hand on cue"
+    },
+    {
+      "id": "trick-training",
+      "label": "Fun tricks",
+      "plainEnglish": "Light-hearted skills for engagement"
+    }
+  ],
+  "missingObjectiveDefinitions": [
+    "down",
+    "housetraining",
+    "puppy-mouthing"
+  ],
+  "lifeStages": [
+    "young_puppy",
+    "older_puppy",
+    "adolescent",
+    "adult",
+    "senior"
+  ],
+  "skillStates": [
+    "not_introduced",
+    "introduced",
+    "practising",
+    "becoming_consistent",
+    "ready_to_increase",
+    "needs_easier"
+  ],
+  "topicGroups": [
+    {
+      "id": "everyday_foundations",
+      "title": "Everyday foundations",
+      "description": "Attention, name response, and simple manners."
+    },
+    {
+      "id": "puppy_life",
+      "title": "Puppy life",
+      "description": "Gentle confidence-building, mouthing redirects, and early life skills."
+    },
+    {
+      "id": "walking_together",
+      "title": "Walking together",
+      "description": "Lead comfort and check-ins on walks."
+    },
+    {
+      "id": "coming_back",
+      "title": "Coming back when called",
+      "description": "Recall foundations that feel rewarding."
+    },
+    {
+      "id": "calm_confidence",
+      "title": "Calm and confidence",
+      "description": "Settling, handling, and quiet rest."
+    },
+    {
+      "id": "life_at_home",
+      "title": "Life at home",
+      "description": "Toilet routines, doorways, greetings, and everyday pauses."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-name-response",
+      "slug": "practise-responding-to-name",
+      "title": "Practise responding to their name",
+      "summary": "Help your dog learn that looking towards you is worthwhile.",
+      "learningObjectiveId": "name-response",
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 2,
+      "prerequisiteIds": [],
+      "purpose": "Help your dog learn that turning towards you when they hear their name is worthwhile. This is everyday positive reinforcement: a valued reward follows the look, so looking becomes more likely.",
+      "preparation": "Choose a quiet room. Have a few small pieces of food your dog enjoys, or another suitable reward.",
+      "steps": [
+        "Wait until your dog is not already looking at you.",
+        "Say their name once in a friendly voice. Their name is the cue for checking in.",
+        "When they turn towards you, say “Yes!” — your marker word — then give a reward. Good timing marks the glance, not what happens afterwards.",
+        "Repeat a few times, allowing short breaks."
+      ],
+      "lookFor": "Your dog starts turning towards you more readily.",
+      "ifDifficult": "Move somewhere quieter, reduce distractions, and make the exercise easier. Avoid repeating their name over and over. If they seem worried, you may be past a comfortable threshold — give more space.",
+      "safetyNote": null,
+      "hint": "Say the name once, then wait. Quiet patience often works better than repeating.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "positive-reinforcement",
+        "reward",
+        "cue",
+        "marker-word",
+        "timing",
+        "threshold"
+      ],
+      "contentVersion": 3,
+      "easierVariationId": null,
+      "harderVariationId": "ex-name-mild-distract",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-name-attention",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-reward-marker",
+      "slug": "introduce-a-yes-word",
+      "title": "Introduce a friendly ‘yes’ word",
+      "summary": "Teach a simple word that means a reward is coming.",
+      "learningObjectiveId": "reward-marker",
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 2,
+      "prerequisiteIds": [],
+      "purpose": "Give yourself a clear way to mark the exact moment your dog does something useful. Trainers call this an event marker. Today you’ll use a spoken marker word — one kind of marker signal.",
+      "preparation": "Have several tiny treats ready for clear reward delivery. Practise somewhere calm with few distractions.",
+      "steps": [
+        "Say “Yes!” in a bright, consistent tone. You may hear trainers call this a marker word.",
+        "Immediately follow with a small reward. The marker identifies the moment; the reward pays for it.",
+        "Repeat a handful of times with short pauses. Aim for crisp timing — marker, then reward.",
+        "Later, use the same word the moment your dog offers something you like (capturing a behaviour)."
+      ],
+      "lookFor": "Your dog starts looking hopeful as soon as they hear the word.",
+      "ifDifficult": "Keep sessions very short and use a reward your dog clearly enjoys. If they get frantic, pause — arousal may be too high for clear learning.",
+      "safetyNote": null,
+      "hint": "The word should come first, then the reward — keep the gap tiny. A clicker is another marker signal; pick one clear option for now.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "event-marker",
+        "marker-word",
+        "marker-signal",
+        "reward",
+        "reward-delivery",
+        "timing",
+        "capturing",
+        "arousal"
+      ],
+      "contentVersion": 4,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-intro-marker",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-engagement-easy",
+      "slug": "invite-attention",
+      "title": "Invite a moment of attention",
+      "summary": "A short, easy way to start a session together.",
+      "learningObjectiveId": "engagement",
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 2,
+      "prerequisiteIds": [],
+      "purpose": "Warm up by encouraging your dog to notice you and choose to engage. You may hear trainers call this focus or engagement.",
+      "preparation": "Stand or sit somewhere quiet. Have a couple of rewards ready — whatever acts as a reinforcer for your dog today.",
+      "steps": [
+        "Make a gentle sound or show a reward near your chest.",
+        "When your dog looks at you, use your marker word and reward. This is capturing a glance.",
+        "Take a small step sideways and wait for another look.",
+        "Finish while it still feels easy and friendly."
+      ],
+      "lookFor": "Willing glances and a relaxed posture.",
+      "ifDifficult": "Move closer, reduce noise, and reward any glance in your direction. Lower your criteria rather than insisting.",
+      "safetyNote": null,
+      "hint": "You are inviting, not insisting. Keep it light.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "engagement",
+        "reinforcer",
+        "marker-word",
+        "capturing",
+        "criteria"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-sit-comfort",
+      "slug": "comfortable-sit",
+      "title": "Teach a comfortable sit",
+      "summary": "Help your dog sit in a way that feels easy and natural.",
+      "learningObjectiveId": "sit",
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-engagement-easy"
+      ],
+      "purpose": "Build a simple sit that your dog can offer without being pushed into position. We’ll use gentle luring to guide the movement.",
+      "preparation": "Use a non-slippery floor. Have treats ready at your dog’s nose height for luring.",
+      "steps": [
+        "Hold a treat near your dog’s nose — this starts the lure.",
+        "Slowly move it up and slightly back over their head (luring into a sit).",
+        "As their bottom lowers, say your marker word and reward. That timing pays for the sit.",
+        "Repeat a few times, then pause before they get tired. Later you can add a verbal cue once the sit is easy."
+      ],
+      "lookFor": "A soft, willing sit without wobbling or worry — early fluency.",
+      "ifDifficult": "Ask for a smaller movement, reward sooner, or practise on a more secure surface. That means lowering your criteria.",
+      "safetyNote": "If sitting seems stiff or painful, stop and speak to your vet before continuing.",
+      "hint": "Lure slowly. Rushing often makes dogs jump instead of sit.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "luring",
+        "marker-word",
+        "timing",
+        "cue",
+        "fluency",
+        "criteria"
+      ],
+      "contentVersion": 4,
+      "easierVariationId": null,
+      "harderVariationId": "ex-down-comfort",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-first-sit",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-down-comfort",
+      "slug": "comfortable-down",
+      "title": "Teach a comfortable down",
+      "summary": "Help your dog lie down willingly without being pushed.",
+      "learningObjectiveId": "down",
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-sit-comfort"
+      ],
+      "purpose": "Build a soft down — lying down on purpose — using gentle luring, not pressure on the shoulders or hips.",
+      "preparation": "Use a non-slippery floor or mat. Have small treats ready. Start somewhere quiet so arousal stays low.",
+      "steps": [
+        "Begin from a sit, or wait until your dog sits.",
+        "Hold a treat at their nose, then slowly lower it straight down toward the floor between their front paws (luring into a down).",
+        "As elbows touch the floor, use your marker word and reward on the floor. That timing pays for the lie-down.",
+        "Repeat a few times. Later you can add a verbal cue once the movement is easy."
+      ],
+      "lookFor": "A willing fold into a down without sprawling in worry or being shoved — early fluency.",
+      "ifDifficult": "Reward a smaller dip toward the floor first, then build. That means lowering your criteria. A softer surface can help.",
+      "safetyNote": "Never push your dog’s back or hips into a down. If lying down seems stiff or painful, stop and speak to your vet.",
+      "hint": "Keep the lure close to the body. Sweeping it too far forward often makes dogs stand up and walk.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "down",
+        "luring",
+        "arousal",
+        "marker-word",
+        "timing",
+        "cue",
+        "fluency",
+        "criteria"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": "ex-sit-comfort",
+      "harderVariationId": "ex-mat-settle",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-down-basics",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-wait-brief",
+      "slug": "brief-wait",
+      "title": "Practise a brief wait",
+      "summary": "Build a short pause before moving on.",
+      "learningObjectiveId": "wait",
+      "category": "manners",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-sit-comfort"
+      ],
+      "purpose": "Help your dog pause calmly for a moment before moving on. Trainers often call this a brief wait. A longer held pause is often called a stay — we are not asking for that yet.",
+      "preparation": "Start indoors. Have a reward ready and keep sessions short.",
+      "steps": [
+        "Ask for a sit, or wait until your dog sits.",
+        "Hold a flat hand briefly as a pause cue.",
+        "Count one second, then use your marker word and reward while they are still waiting.",
+        "Release with a cheerful word such as “okay” and take a step together."
+      ],
+      "lookFor": "A relaxed pause without leaping up early — early fluency, not a long stare-down.",
+      "ifDifficult": "Reward after half a second, then gradually build. That means lowering your criteria.",
+      "safetyNote": null,
+      "hint": "Short successful waits beat long, wobbly ones. Save a formal stay for when short waits feel easy.",
+      "topicGroup": "life_at_home",
+      "glossaryTermIds": [
+        "wait",
+        "stay",
+        "cue",
+        "marker-word",
+        "fluency",
+        "criteria"
+      ],
+      "contentVersion": 3,
+      "easierVariationId": "ex-sit-comfort",
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-stay-basics",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-mat-settle",
+      "slug": "settle-on-a-mat",
+      "title": "Settle on a mat",
+      "summary": "Show your dog that a mat is a calm, rewarding place.",
+      "learningObjectiveId": "mat-settle",
+      "category": "calm",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Give your dog a clear place to settle, useful for busy moments at home. We’ll build it with shaping — rewarding small steps towards lying calmly on the mat.",
+      "preparation": "Place a mat or towel on the floor in a quiet spot. Have soft rewards ready.",
+      "steps": [
+        "Toss a treat onto the mat and let your dog step on to eat it. Approaching can be your first criteria.",
+        "Use your marker word for any feet on the mat and reward on the mat.",
+        "If they lie down, mark and reward calmly — a bigger step in the shaping plan.",
+        "Keep early sessions short and end before they wander off."
+      ],
+      "lookFor": "Willing approaches to the mat and softer body language.",
+      "ifDifficult": "Make the mat more inviting with easier rewards and less pressure to stay. Lower the criteria.",
+      "safetyNote": null,
+      "hint": "Reward on the mat itself so the place becomes valuable. Later, approach → settle can become a short behaviour chain.",
+      "topicGroup": "calm_confidence",
+      "glossaryTermIds": [
+        "settle",
+        "shaping",
+        "criteria",
+        "marker-word",
+        "body-language",
+        "behaviour-chain"
+      ],
+      "contentVersion": 3,
+      "easierVariationId": null,
+      "harderVariationId": "ex-calm-home",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-settle-mat",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-calm-home",
+      "slug": "calm-settle-at-home",
+      "title": "Practise calm settling at home",
+      "summary": "Build quiet moments into ordinary household life.",
+      "learningObjectiveId": "calm-home",
+      "category": "calm",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-mat-settle"
+      ],
+      "purpose": "Help your dog practise a calm settle while everyday life continues nearby — gentle generalisation of the mat skill. Going to the mat and settling can become a short behaviour chain once each piece is easy.",
+      "preparation": "Use the mat your dog already knows. Start when the house is fairly quiet so arousal stays manageable.",
+      "steps": [
+        "Invite your dog to the mat and reward a settle.",
+        "Sit nearby and calmly read or sip a drink for a minute.",
+        "Quietly reward soft staying every so often — keep criteria realistic. You do not need a fixed reinforcement schedule yet; pay often while this is new.",
+        "Release gently and finish before they get restless. Allow recovery time afterwards if needed."
+      ],
+      "lookFor": "Softer breathing and a willingness to stay without fussing. Watch body language.",
+      "ifDifficult": "Shorten the time, reduce household movement, and return to simpler mat rewards.",
+      "safetyNote": null,
+      "hint": "Calm owner energy helps. Avoid excitedly chatting through the settle.",
+      "topicGroup": "calm_confidence",
+      "glossaryTermIds": [
+        "settle",
+        "generalisation",
+        "arousal",
+        "criteria",
+        "recovery-time",
+        "body-language",
+        "behaviour-chain",
+        "reinforcement-schedule"
+      ],
+      "contentVersion": 3,
+      "easierVariationId": "ex-mat-settle",
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-handling-touch",
+      "slug": "gentle-handling",
+      "title": "Build comfortable handling",
+      "summary": "Help your dog feel safe with gentle everyday touch.",
+      "learningObjectiveId": "handling",
+      "category": "confidence",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Make collar touches, ear checks, and gentle handling feel predictable and kind. This supports choice and consent in handling.",
+      "preparation": "Choose a quiet spot. Have high-value rewards. Keep your movements slow.",
+      "steps": [
+        "Touch a neutral area such as the shoulder for one second.",
+        "Use your marker word and reward immediately.",
+        "Repeat with brief touches to collar area, then paws if comfortable.",
+        "Stop while your dog still looks relaxed — watch their body language."
+      ],
+      "lookFor": "Soft eyes, loose body, and willingness to stay near you. Notice stress signals such as freezing or turning away.",
+      "ifDifficult": "Touch even more briefly, use better rewards, and avoid areas your dog finds tricky.",
+      "safetyNote": "If your dog flinches, freezes, growls, or tries to move away, stop. Do not force handling.",
+      "hint": "Touch, then reward. Never pin or restrain for this exercise.",
+      "topicGroup": "calm_confidence",
+      "glossaryTermIds": [
+        "choice-consent",
+        "marker-word",
+        "body-language",
+        "stress-signals"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-name-mild-distract",
+      "slug": "name-with-mild-distraction",
+      "title": "Name response with a mild distraction",
+      "summary": "Practise checking in when something else is nearby.",
+      "learningObjectiveId": "name-response",
+      "category": "engagement",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-name-response"
+      ],
+      "purpose": "Strengthen name response when the environment is a little more interesting. This is gentle proofing / generalisation — the same skill in a slightly harder picture.",
+      "preparation": "Start in a familiar room with a mild distraction, such as a toy on the floor.",
+      "steps": [
+        "Wait until your dog notices the mild distraction.",
+        "Say their name once — one clear cue.",
+        "If they turn to you, use your marker word and reward generously.",
+        "If not, move a little closer or make the distraction quieter, then try again. Extra distance from the distraction often helps."
+      ],
+      "lookFor": "Turning to you even when something else is present.",
+      "ifDifficult": "Return to quiet name practice, then add distraction more gradually. If they cannot respond comfortably, you may be past a practical threshold — make it easier.",
+      "safetyNote": null,
+      "hint": "One clear name cue. If they miss it, change the setup rather than repeating loudly.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "proofing",
+        "generalisation",
+        "trigger",
+        "cue",
+        "marker-word",
+        "distance",
+        "threshold"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": "ex-name-response",
+      "harderVariationId": "ex-recall-foundation",
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-recall-foundation",
+      "slug": "recall-foundations",
+      "title": "Build a recall foundation",
+      "summary": "Make coming back to you feel brilliant.",
+      "learningObjectiveId": "recall",
+      "category": "recall",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-name-response"
+      ],
+      "purpose": "Teach a recall — coming towards you when invited — so return feels like one of the best choices available.",
+      "preparation": "Use a hallway or quiet garden. Have excellent rewards. Keep a long line if outdoors (management for safety while you train).",
+      "steps": [
+        "Crouch slightly and use a cheerful recall cue once.",
+        "As your dog moves towards you, encourage warmly.",
+        "When they arrive, use your marker word and give several small rewards (positive reinforcement).",
+        "Release them to sniff again so coming back does not end the fun."
+      ],
+      "lookFor": "Willing movement towards you without hesitation.",
+      "ifDifficult": "Start closer, use better rewards, and practise before arousal gets high.",
+      "safetyNote": "Do not practise off-lead near roads or unfenced hazards until your dog is ready.",
+      "hint": "Reward arrival generously. Coming back should feel like a celebration.",
+      "topicGroup": "coming_back",
+      "glossaryTermIds": [
+        "recall",
+        "management",
+        "cue",
+        "marker-word",
+        "positive-reinforcement",
+        "arousal"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": "ex-name-response",
+      "harderVariationId": "ex-recall-mild-distract",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-recall-basics",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-recall-mild-distract",
+      "slug": "recall-with-mild-distraction",
+      "title": "Recall with a mild distraction",
+      "summary": "Practise coming back when something else is mildly interesting.",
+      "learningObjectiveId": "recall",
+      "category": "recall",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 3,
+      "estimatedMinutes": 4,
+      "prerequisiteIds": [
+        "ex-recall-foundation"
+      ],
+      "purpose": "Strengthen recall when your dog has a mild competing interest — careful proofing, not a hard test.",
+      "preparation": "Quiet outdoor space or large room. Use a long line for safety outdoors (management).",
+      "steps": [
+        "Allow a brief sniff or glance at a mild distraction.",
+        "Give your recall cue once in a friendly voice.",
+        "Reward heavily for coming away and returning.",
+        "Keep success easy — distance and distraction should still feel under a comfortable threshold."
+      ],
+      "lookFor": "Turning away from the distraction and returning willingly.",
+      "ifDifficult": "Reduce distance, choose a quieter spot, or return to easier recall games. Lower the criteria.",
+      "safetyNote": "If your dog becomes overwhelmed or overexcited, pause and simplify. Use a lead or long line.",
+      "hint": "Set them up to succeed. Hard recalls learnt through failure take longer to repair.",
+      "topicGroup": "coming_back",
+      "glossaryTermIds": [
+        "recall",
+        "proofing",
+        "management",
+        "cue",
+        "reward",
+        "distance",
+        "threshold",
+        "criteria"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": "ex-recall-foundation",
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-lead-intro",
+      "slug": "friendly-lead-introduction",
+      "title": "Make the lead feel friendly",
+      "summary": "Help your dog feel comfortable wearing and moving on a lead.",
+      "learningObjectiveId": "lead-walking",
+      "category": "walking",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Build positive feelings about the harness or collar and a light lead — a kind foundation for later loose lead walking.",
+      "preparation": "Use a well-fitting harness if possible. Practise indoors first. Support choice consent by going slowly.",
+      "steps": [
+        "Present the harness or collar and reward curiosity.",
+        "Put it on gently, then reward and remove before fuss builds. Watch body language.",
+        "Clip on a light lead and take a few steps indoors, rewarding calm movement.",
+        "Keep the session short and end on a success. Allow recovery time if your dog seemed tense."
+      ],
+      "lookFor": "Relaxed body language while kitted up.",
+      "ifDifficult": "Go slower, pair each step with food, and practise for seconds rather than minutes. Lower the criteria.",
+      "safetyNote": "Avoid tight collars that dig in, and never use equipment designed to cause pain or fear.",
+      "hint": "The kit should predict good things, not the start of a battle.",
+      "topicGroup": "walking_together",
+      "glossaryTermIds": [
+        "loose-lead-walking",
+        "choice-consent",
+        "reward",
+        "body-language",
+        "recovery-time",
+        "criteria"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": "ex-lead-loose",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-loose-lead",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-lead-loose",
+      "slug": "loose-lead-foundations",
+      "title": "Loose-lead walking foundations",
+      "summary": "Reward walking near you with a soft lead.",
+      "learningObjectiveId": "lead-walking",
+      "category": "walking",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 4,
+      "prerequisiteIds": [
+        "ex-lead-intro"
+      ],
+      "purpose": "Build loose lead walking by paying generously when the lead stays soft.",
+      "preparation": "Start in a quiet indoor space or empty car park. Have treats accessible. Choose a place where arousal can stay moderate.",
+      "steps": [
+        "Begin walking and use your marker word for any moment the lead is soft.",
+        "Reward by your side — soft lead earns good things (positive reinforcement).",
+        "If the lead tightens, stop politely and wait for slack, then move on.",
+        "Keep sessions short — a few good metres beat a long struggle."
+      ],
+      "lookFor": "More frequent soft-lead moments and checking in with you.",
+      "ifDifficult": "Practise in a quieter place, reward more often, and shorten the walk segment.",
+      "safetyNote": "Do not jerk the lead or use aversive equipment. If walks feel unsafe, seek local reward-based help.",
+      "hint": "Reward the lead when it is soft. Stopping is clearer than tugging.",
+      "topicGroup": "walking_together",
+      "glossaryTermIds": [
+        "loose-lead-walking",
+        "arousal",
+        "marker-word",
+        "reward",
+        "positive-reinforcement"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": "ex-lead-intro",
+      "harderVariationId": "ex-check-in-walk",
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-loose-lead",
+          "source": "src/lib/domains/dog-training/content/kb-import/good-dog-domain.json#held"
+        }
+      ]
+    },
+    {
+      "id": "ex-check-in-walk",
+      "slug": "check-ins-on-walks",
+      "title": "Practise check-ins on walks",
+      "summary": "Reward your dog for glancing back to you outdoors.",
+      "learningObjectiveId": "check-in",
+      "category": "walking",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-name-response",
+        "ex-lead-intro"
+      ],
+      "purpose": "Make voluntarily checking in with you a habit on ordinary walks — outdoor engagement and light generalisation.",
+      "preparation": "Choose a familiar, fairly quiet walking route. Keep rewards handy. Stay under a comfortable threshold.",
+      "steps": [
+        "Walk normally and watch for any glance towards you (capturing).",
+        "Use your marker word and reward those check-ins.",
+        "Occasionally say their name once if needed, then reward the turn — that name is a cue.",
+        "Keep it conversational — a few good check-ins is enough."
+      ],
+      "lookFor": "More frequent voluntary looks back to you.",
+      "ifDifficult": "Use a quieter route and reward even tiny head turns in your direction. Lower the criteria.",
+      "safetyNote": null,
+      "hint": "Catch the check-in early. You are paying for attention, not waiting for perfection.",
+      "topicGroup": "walking_together",
+      "glossaryTermIds": [
+        "engagement",
+        "generalisation",
+        "threshold",
+        "capturing",
+        "marker-word",
+        "cue",
+        "criteria"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": "ex-name-response",
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-leave-it-easy",
+      "slug": "easy-leave-it",
+      "title": "Easy ‘leave it’ game",
+      "summary": "Practise turning away from a mildly interesting item.",
+      "learningObjectiveId": "leave-it",
+      "category": "manners",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-engagement-easy"
+      ],
+      "purpose": "Practise an easy leave it game: turning away from something can earn something better. This is training; keeping unsafe items out of reach is management.",
+      "preparation": "Use a low-value item under your foot or hand, and higher-value rewards from your other hand. Dangerous items are a management job first — not a training game.",
+      "steps": [
+        "Place a dull item where your dog can see but not take it.",
+        "Wait for any look away or pause — that is today’s criteria.",
+        "Use your marker word and reward from your other hand. A kind trade or swap is a related skill for items already in the mouth — we are not practising that here.",
+        "Repeat a few times, keeping success easy."
+      ],
+      "lookFor": "Offering space from the item without tension. Watch body language.",
+      "ifDifficult": "Use an even duller item and reward the tiniest look away.",
+      "safetyNote": "Do not use this game with dangerous items your dog might grab. Manage first, train second. If your dog stiffens or growls over items, pause and seek qualified reward-based help rather than forcing a drop swap.",
+      "hint": "You are teaching a choice, not a stare-down.",
+      "topicGroup": "life_at_home",
+      "glossaryTermIds": [
+        "leave-it",
+        "management",
+        "training-vs-management",
+        "criteria",
+        "marker-word",
+        "body-language",
+        "drop-swap"
+      ],
+      "contentVersion": 4,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-leave-it-basics",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-door-manners",
+      "slug": "calm-at-the-door",
+      "title": "Calm moments at the door",
+      "summary": "Practise pausing calmly near a doorway.",
+      "learningObjectiveId": "door-manners",
+      "category": "manners",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-wait-brief"
+      ],
+      "purpose": "Make doorways less exciting so exits feel safer and calmer. This is everyday door manners, built from a brief wait plus management — a clear training vs management pairing.",
+      "preparation": "Practise at an internal door first. Have rewards ready. Keep arousal low.",
+      "steps": [
+        "Approach the closed door together.",
+        "Ask for a brief wait or reward any calm feet-still moment.",
+        "Open the door a little, use your marker word for calm, then close and reward.",
+        "Only move through once calm feels easy."
+      ],
+      "lookFor": "Less rushing and more settled feet near the door.",
+      "ifDifficult": "Practise further from the door and keep openings tiny. Increase distance from the excitement. Use management (lead, quieter exit) while you train.",
+      "safetyNote": null,
+      "hint": "The door opening is a privilege earned by calm, not a race start.",
+      "topicGroup": "life_at_home",
+      "glossaryTermIds": [
+        "door-manners",
+        "wait",
+        "management",
+        "training-vs-management",
+        "arousal",
+        "marker-word",
+        "distance"
+      ],
+      "contentVersion": 4,
+      "easierVariationId": "ex-wait-brief",
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-greeting-calm",
+      "slug": "calmer-greetings",
+      "title": "Practise calmer greetings",
+      "summary": "Help your dog greet people with softer energy.",
+      "learningObjectiveId": "greetings",
+      "category": "manners",
+      "lifeStages": [
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-sit-comfort"
+      ],
+      "purpose": "Teach that calm approaches earn attention, while jumping gets a gentle reset. Use management and clear criteria, not confrontation.",
+      "preparation": "Ask a helper to approach slowly. Have treats ready. Keep greetings short so arousal does not spike.",
+      "steps": [
+        "Helper approaches without excited talk.",
+        "If your dog keeps paws down, use your marker word and allow a brief hello.",
+        "If they jump, helper calmly steps back and waits (management).",
+        "Reward the next calm moment and end before overexcitement builds. Allow recovery time if needed."
+      ],
+      "lookFor": "More four-paws-on-floor greetings. Soft body language beats a stiff “sit” under pressure.",
+      "ifDifficult": "Greet at a greater distance, keep visits shorter, and reward calmer earlier signs.",
+      "safetyNote": "If greeting involves snapping, lunging, or serious worry, stop and seek qualified reward-based help.",
+      "hint": "Attention is the reward. Jumping should pause the greeting, not create a scuffle.",
+      "topicGroup": "life_at_home",
+      "glossaryTermIds": [
+        "management",
+        "criteria",
+        "arousal",
+        "marker-word",
+        "recovery-time",
+        "body-language",
+        "distance"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-jumping-up",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-rest-spot",
+      "slug": "quiet-rest-spot",
+      "title": "Build a quiet rest spot",
+      "summary": "Help your dog enjoy a predictable place to settle.",
+      "learningObjectiveId": "rest-spot",
+      "category": "calm",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Create a rest place that predicts calm rewards and quiet time — a soft form of enrichment and a calm settle option.",
+      "preparation": "Choose a bed, crate with door open, or corner mat. Never force confinement; support choice consent.",
+      "steps": [
+        "Toss a few treats onto the rest spot.",
+        "Reward your dog for going there voluntarily (capturing).",
+        "Sit nearby for a short calm minute.",
+        "Allow free exit — the spot should feel optional and safe."
+      ],
+      "lookFor": "Willing visits and softer settling. Soft body language.",
+      "ifDifficult": "Use better treats, shorter stays, and keep the area open and inviting.",
+      "safetyNote": "Do not shut a worried dog in a crate for this exercise. Rest places should feel safe.",
+      "hint": "Optional beats forced. A rest spot works when the dog chooses it.",
+      "topicGroup": "calm_confidence",
+      "glossaryTermIds": [
+        "enrichment",
+        "settle",
+        "choice-consent",
+        "reward",
+        "capturing",
+        "body-language"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-puppy-sounds",
+      "slug": "puppy-everyday-sounds",
+      "title": "Get used to everyday sounds",
+      "summary": "Gently introduce ordinary household noises.",
+      "learningObjectiveId": "puppy-confidence",
+      "category": "puppy",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Help a puppy feel more confident about normal home sounds at a comfortable distance. You may hear related ideas called desensitisation and counterconditioning — we keep this gentle and optional.",
+      "preparation": "Stay far enough away that the sound is mild (below a practical threshold). Have tasty rewards ready.",
+      "steps": [
+        "Play a quiet everyday sound (kettle, distant traffic recording, soft doorbell).",
+        "As soon as it starts, scatter a few treats on the floor so the sound predicts good news.",
+        "Keep the volume low and the session short.",
+        "Stop if your puppy looks worried — notice stress signals. Quieter and further is better."
+      ],
+      "lookFor": "Curious or neutral responses rather than startling or hiding.",
+      "ifDifficult": "Turn the sound down, increase distance, and pair with easier rewards. Never push through fear.",
+      "safetyNote": "Never force a puppy to stay near a scary sound. Fear needs space and time. Serious fear needs qualified in-person help — this app is not a treatment plan.",
+      "hint": "Sound predicts snacks. Keep it boringly gentle.",
+      "topicGroup": "puppy_life",
+      "glossaryTermIds": [
+        "distance",
+        "desensitisation",
+        "counterconditioning",
+        "threshold",
+        "stress-signals"
+      ],
+      "contentVersion": 3,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-puppy-surfaces",
+      "slug": "puppy-different-surfaces",
+      "title": "Explore different surfaces",
+      "summary": "Help your puppy feel confident on varied ground.",
+      "learningObjectiveId": "puppy-confidence",
+      "category": "puppy",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Build confidence on grass, rubber mats, or other safe everyday surfaces — gentle exploration with choice consent.",
+      "preparation": "Choose two safe surfaces. Keep sessions playful and optional. Stay under a comfortable threshold.",
+      "steps": [
+        "Invite your puppy onto a familiar surface and reward.",
+        "Place a few treats just onto the edge of a new surface.",
+        "Let them choose to step on — never push or drag. Watch body language and stress signals.",
+        "Celebrate small steps and finish while they still feel brave. Allow recovery time afterwards."
+      ],
+      "lookFor": "Willing investigation without freezing or rushing away.",
+      "ifDifficult": "Make the new surface smaller, closer to a familiar one, and more heavily rewarded. Increase comfort distance from anything scary.",
+      "safetyNote": "Avoid slippery or unsafe surfaces. If your puppy seems sore, check with a vet.",
+      "hint": "Choice builds confidence. Pushing builds worry.",
+      "topicGroup": "puppy_life",
+      "glossaryTermIds": [
+        "choice-consent",
+        "threshold",
+        "reward",
+        "body-language",
+        "stress-signals",
+        "recovery-time",
+        "distance"
+      ],
+      "contentVersion": 2,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-toilet-routine",
+      "slug": "toilet-routine-basics",
+      "title": "Build a simple toilet routine",
+      "summary": "Use timing, supervision, and calm rewards for toileting outside.",
+      "learningObjectiveId": "housetraining",
+      "category": "home",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 4,
+      "prerequisiteIds": [],
+      "purpose": "Set up everyday housetraining with management first: take your dog out often, supervise indoors, and reward toileting outside. Accidents are information, not defiance.",
+      "preparation": "Choose a regular outdoor toilet spot. Have a lead ready and a few small rewards. Limit free roam indoors when you cannot watch (management).",
+      "steps": [
+        "Take your dog out after waking, after meals, after play, and about every 1–2 hours for young puppies (less often for older dogs).",
+        "Wait quietly at the toilet spot. When they toilet outside, use your marker word calmly and give a reward.",
+        "If an accident happens indoors, clean thoroughly with an enzymatic cleaner. Skip scolding — it often teaches hiding, not holding on.",
+        "Indoors, interrupt gently if you catch them mid-sniff circling, then go straight outside and reward success there."
+      ],
+      "lookFor": "More toileting in the outdoor spot and fewer indoor accidents over days — not overnight perfection.",
+      "ifDifficult": "Increase outdoor trips, tighten indoor management (lead indoors, smaller room, puppy pen), and reward outdoor toileting more generously.",
+      "safetyNote": "Sudden loss of house training, straining, blood, or frequent attempts can be medical — contact your vet. Do not rub a dog’s nose in accidents or use punishment.",
+      "hint": "Prevention beats mopping. Supervise, schedule, and pay outdoor toileting well.",
+      "topicGroup": "life_at_home",
+      "glossaryTermIds": [
+        "housetraining",
+        "management",
+        "marker-word",
+        "reward",
+        "training-vs-management"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": []
+    },
+    {
+      "id": "ex-puppy-mouthing",
+      "slug": "puppy-mouthing-redirect",
+      "title": "Redirect puppy mouthing",
+      "summary": "Give mouths a legal outlet and pause play when teeth land on skin.",
+      "learningObjectiveId": "puppy-mouthing",
+      "category": "puppy",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [],
+      "purpose": "Help with everyday mouthing: puppies explore with their mouths. We use management, a pause, and a chew or toy — not smacking, yelling, or holding the mouth shut.",
+      "preparation": "Have a soft toy or suitable chew ready. Keep sessions short. If your puppy is overtired, they often mouth more — plan a rest after (recovery time / enrichment).",
+      "steps": [
+        "Start calm play with hands as invitations, not wrestle targets.",
+        "If teeth touch skin or clothes, calmly stop moving hands and pause play for a few seconds.",
+        "Offer the toy or chew as a redirect. When they mouth the toy, use your marker word and continue briefly.",
+        "End before the puppy gets frantic. Tired, overstimulated puppies need sleep more than more games — watch arousal and stress signals."
+      ],
+      "lookFor": "More chewing on toys/chews and shorter mouthing-on-people bursts. Soft body language during play.",
+      "ifDifficult": "Shorten play, add a rest break, use a longer toy, and increase management (playpen, chew station). Avoid rough hand play that invites nipping.",
+      "safetyNote": "Hard biting that breaks skin, guarding toys with growling/snapping, or fear-based biting is beyond this app — seek suitably qualified reward-based help, and a vet if pain seems possible. Never use physical punishment for mouthing.",
+      "hint": "Be boring when teeth hit skin; be interesting when the toy is in the mouth.",
+      "topicGroup": "puppy_life",
+      "glossaryTermIds": [
+        "mouthing",
+        "management",
+        "recovery-time",
+        "enrichment",
+        "marker-word",
+        "arousal",
+        "stress-signals",
+        "body-language"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-mouthing-redirect",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-kb-rspca-leave",
+      "slug": "kb-rspca-leave",
+      "title": "Teach leave (RSPCA method)",
+      "summary": "Reward your dog for backing away from something in your hand.",
+      "learningObjectiveId": "leave-it",
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-leave-it-easy"
+      ],
+      "purpose": "Build a clear leave-it: your dog learns that backing away from something in your hand makes the reward happen.",
+      "preparation": "Use small treats. Practise somewhere calm with no competing distractions.",
+      "steps": [
+        "Place a treat in a closed fist. Say “take it” in a friendly voice and let your dog sniff or lick without opening your hand.",
+        "When they back off even slightly, open your fist, release the treat, and praise generously.",
+        "Add a gentle “leave” as they back off, then release the treat. Later, show a treat in an open palm and reward from your other hand when they leave it."
+      ],
+      "lookFor": "Your dog pauses or moves away when you say leave, waiting for the reward.",
+      "ifDifficult": "Keep the treat fully hidden longer and reward the smallest glance away from your fist.",
+      "safetyNote": "If your dog growls over food or items, stop and seek qualified reward-based help. Use fair trades if they already have something in their mouth.",
+      "hint": "Reward the moment they choose to back off — not after they grab the treat.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "leave-it",
+        "positive-reinforcement",
+        "reward"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-rspca-leave",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-kb-emergency-recall",
+      "slug": "kb-emergency-recall",
+      "title": "Emergency recall practice",
+      "summary": "Make coming back always worth it — practise on a long line first.",
+      "learningObjectiveId": "recall",
+      "category": "recall",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 2,
+      "estimatedMinutes": 4,
+      "prerequisiteIds": [
+        "ex-recall-foundation"
+      ],
+      "purpose": "Strengthen recall so your dog learns that returning to you is always safe and rewarding — never punished for being slow.",
+      "preparation": "Use a secure area and a long line on a harness. Have high-value treats ready.",
+      "steps": [
+        "Warm up with name response and your usual recall cue in a quiet spot.",
+        "When your dog is on the long line, call once in a happy voice. Reward generously when they reach you — including collar touch if they are comfortable.",
+        "Keep sessions short. Stay on the long line until recall is reliable before considering off-lead freedom in open spaces."
+      ],
+      "lookFor": "Quicker, happier returns when you call — even when mildly distracted.",
+      "ifDifficult": "Move closer, use better rewards, and reduce distractions. Never punish a late return.",
+      "safetyNote": "Keep your dog on a long line until recall is solid. Ensure collar ID and microchip details are up to date. Off-lead freedom only when you are confident and the area is secure.",
+      "hint": "Your voice and body language should mean “good things happen here”.",
+      "topicGroup": "coming_back",
+      "glossaryTermIds": [
+        "recall",
+        "reward",
+        "positive-reinforcement"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-emergency-recall",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-kb-hand-touch",
+      "slug": "kb-hand-touch",
+      "title": "Teach your dog to touch your hand",
+      "summary": "A simple nose-to-hand touch for focus and handling prep.",
+      "learningObjectiveId": "hand-target",
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-reward-marker"
+      ],
+      "purpose": "Teach a cheerful hand touch — useful for focus, grooming prep, and vet visits.",
+      "preparation": "Have treats ready. Hold your open hand at nose height in a quiet room.",
+      "steps": [
+        "Rub a treat on your palm and hold your hand out. When your dog sniffs or touches with their nose, use your marker word and reward.",
+        "When they touch every time, say “touch” as contact happens.",
+        "Build to one second, then a few seconds of contact before you mark and reward.",
+        "Add a very mild distraction (e.g. kibble in your other hand) only when five-second touches are easy."
+      ],
+      "lookFor": "Quick, confident nose touches on cue.",
+      "ifDifficult": "Hold the hand closer to their nose and reward smaller movements toward your palm.",
+      "safetyNote": null,
+      "hint": "Keep it fun — short sessions beat long drilling.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "marker-word"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-hand-touch",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-kb-drop-it-swap",
+      "slug": "kb-drop-it-swap",
+      "title": "Drop it and swap",
+      "summary": "Trade toys calmly — never chase or grab from your dog’s mouth.",
+      "learningObjectiveId": "leave-it",
+      "category": "manners",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-leave-it-easy"
+      ],
+      "purpose": "Teach your dog that letting go of a toy leads to something better — without chase games or prying items away.",
+      "preparation": "Use a toy that is not their favourite and very tasty treats.",
+      "steps": [
+        "Encourage a short play with the toy, then place treats on the floor beside your dog.",
+        "When they choose to leave the toy for the treats, praise calmly and let them play again.",
+        "When they reliably swap, say “drop” or “out” while they have the toy, then place the treats down.",
+        "Offer fair trades for forbidden items — better rewards before you need to take anything away."
+      ],
+      "lookFor": "Voluntary drops when you cue, without tension over possessions.",
+      "ifDifficult": "Use higher-value treats and shorter play bursts.",
+      "safetyNote": "If your dog growls or snaps over items, stop and seek ABTC-registered behaviour support.",
+      "hint": "Never turn dropping into a battle — swaps should feel like a win for your dog.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "leave-it",
+        "management",
+        "reward"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-drop-it-swap",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    },
+    {
+      "id": "ex-kb-spin-trick",
+      "slug": "kb-spin-trick",
+      "title": "Teach your dog to spin",
+      "summary": "A fun circle trick for engagement and short sessions.",
+      "learningObjectiveId": "trick-training",
+      "category": "engagement",
+      "lifeStages": [
+        "young_puppy",
+        "older_puppy",
+        "adolescent",
+        "adult",
+        "senior"
+      ],
+      "difficulty": 1,
+      "estimatedMinutes": 3,
+      "prerequisiteIds": [
+        "ex-reward-marker"
+      ],
+      "purpose": "A light-hearted spin for fun and focus — keep sessions short and upbeat.",
+      "preparation": "Stand in a quiet space with treats ready.",
+      "steps": [
+        "Hold a treat at your dog’s nose and move it slowly to the side of their head so they follow.",
+        "Continue the circle; when they complete it, mark enthusiastically and reward. Reward a half turn first if a full circle is hard.",
+        "Add the word “spin” as you guide with an empty hand, then shrink the hand signal to a small wrist movement."
+      ],
+      "lookFor": "A full circle on a small hand signal or verbal cue.",
+      "ifDifficult": "Reward quarter or half turns and build the circle gradually.",
+      "safetyNote": null,
+      "hint": "End while your dog is still enjoying the game.",
+      "topicGroup": "everyday_foundations",
+      "glossaryTermIds": [
+        "luring",
+        "marker-word",
+        "reward"
+      ],
+      "contentVersion": 1,
+      "easierVariationId": null,
+      "harderVariationId": null,
+      "crashLessonAliases": [
+        {
+          "lessonId": "lesson-spin-trick",
+          "source": "src/lib/domains/dog-training/kb-crash-course.ts#LESSON_EXERCISE_MAP"
+        }
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "lessonId": "lesson-puppy-socialisation",
+      "title": "Socialise your puppy safely",
+      "summary": "Go at your puppy's pace, keep experiences positive, and follow your vet's guidance before walks on the ground.",
+      "advisory": true,
+      "advisoryMessage": "Follow your vet's vaccination and socialisation timing for your puppy.",
+      "protocolId": "proto-puppy-socialisation-dt",
+      "kind": null,
+      "instructions": "### Step 1 Begin at home with gentle handling, household sounds (e.g. vacuum off then on at distance), varied surfaces and props (hats, umbrellas) at puppy's pace with rewards for relaxed behaviour. If this is hard: Increase distance; reduce duration; split stimuli. ### Step 2 Before full vaccination, carry puppy to observe people, traffic and dogs from safe distance; reward calm observation. If this is hard: Shorter outings; quieter locations. ### Step 3 After vaccination clearance, introduce walks, varied dogs/animals at distance, visitors and sound desensitisation; stop immediately if puppy becomes worried or over-aroused. If this is hard: Return to earlier step; consult vet/trainer.",
+      "safetyNotes": "- Follow vet vaccination and parasite advice\n- Persistent fear—professional help\nFollow your vet's vaccination and socialisation timing for your puppy.",
+      "keywords": [
+        "socialise",
+        "socialization",
+        "puppy",
+        "vaccination",
+        "before vaccinations",
+        "carry in sling/carrier",
+        "vet timing",
+        "positive exposures at home",
+        "stop interaction",
+        "reduce intensity",
+        "seek professional help if persistent"
+      ],
+      "provenance": {
+        "protocolId": "proto-puppy-socialisation-dt",
+        "claimIds": [
+          "claim-dt-pupsoc-003-stop-if-worried",
+          "claim-dt-pupsoc-001-critical-window",
+          "claim-dt-pupsoc-002-vaccination-before-ground",
+          "claim-dt-pup101-001-individual-pace"
+        ],
+        "sourceIds": [
+          "src-dt-puppy-socialisation",
+          "src-dt-puppy-training-101"
+        ],
+        "reviewStatus": "requires_human_review",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-steal-chase",
+      "title": "Stop the steal-and-chase game",
+      "summary": "Do not chase stolen items; wait for a drop and redirect to proper toys and chews.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-steal-chase-management-dt",
+      "kind": null,
+      "instructions": "### Step 1 When your dog picks up a non-dangerous item, do not chase; wait calmly until they drop it. If this is hard: Remove tempting items from reach. ### Step 2 Increase enrichment and training so your dog gets attention without stealing. If this is hard: Expect temporary increase when ignoring (it may happen more often for a short while, then fade).",
+      "safetyNotes": "- If your dog growls or snaps over food or items, stop and ask an ABTC clinical animal behaviourist for help.\n- Aggression over resources—refer out",
+      "keywords": [
+        "steal",
+        "stolen",
+        "chase",
+        "runs away with",
+        "drop it",
+        "guarding",
+        "chase game reinforcement",
+        "enrichment",
+        "trade-up"
+      ],
+      "provenance": {
+        "protocolId": "proto-steal-chase-management-dt",
+        "claimIds": [
+          "claim-dt-steal-001-no-chase-game",
+          "claim-dt-steal-002-ignore-drop",
+          "claim-dt-steal-003-enrichment"
+        ],
+        "sourceIds": [
+          "src-dt-stop-stealing"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-read-your-dog-stress",
+      "title": "Read stress signals",
+      "summary": "Notice lip licks, yawning, and turning away—pause and help your dog feel safe.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-recognise-stress-signals",
+      "kind": null,
+      "instructions": "### Step 1 Look at your dog as a whole, together with the situation, not just one sign. Subtle signs include yawning when not tired, lip licking, panting when not hot, pinned-back ears, whale eye, pacing, and turning away or withdrawing. Clearer signs include loss of appetite, backing away, a tucked tail, cowering, trembling and a fixed stare. If this is hard: Note down when and where the signs happen to spot a pattern. ### Step 2 When you see stress signs, stay calm, avoid raising your voice, and move your dog away from the cause or give them a quiet space to retreat to without forcing interaction. If this is hard: Increase the distance or end the activity for the day. ### Step 3 Keep routines steady, change them gradually, and balance enrichment with plenty of rest. Contact your vet if the change in behaviour is sudden, or if signs keep happening, because health problems can cause similar signs. If this is hard: Ask your vet for tailored advice or a referral.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Never tell your dog off for growling. It is a warning, so give them space and ask your vet and a qualified behaviourist for help.\n- If your dog stiffens and stares, growls, shows teeth, snaps or bites, give them space and contact your vet and a qualified behaviourist.",
+      "keywords": [
+        "stress signals",
+        "lip lick",
+        "yawning",
+        "body language",
+        "anxious",
+        "turning away",
+        "whale eye",
+        "tucked tail",
+        "panting",
+        "yawn",
+        "pause the session",
+        "yawning or lip licking",
+        "loss of appetite",
+        "look at the whole dog and context",
+        "do not punish a warning",
+        "create space"
+      ],
+      "provenance": {
+        "protocolId": "proto-recognise-stress-signals",
+        "claimIds": [
+          "claim-bc-stress-002-body-language-list",
+          "claim-bc-stress-003-subtle-and-obvious-signs",
+          "claim-pdsa-stress-001-whole-dog-and-context",
+          "claim-bc-stress-004-defensive-escalation-health",
+          "claim-bc-stress-005-help-calm-dog",
+          "claim-bc-stress-001-no-punish-defensive",
+          "claim-pdsa-stress-002-prevention-and-patterns"
+        ],
+        "sourceIds": [
+          "src-bluecross-stress-dogs",
+          "src-pdsa-stress-dogs",
+          "src-dt-happy-vet-visits"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-fireworks-management",
+      "title": "Help your dog through fireworks",
+      "summary": "Create a safe space, stay calm, and watch for stress signs—get professional help for severe fear.",
+      "advisory": true,
+      "advisoryMessage": "If your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support.",
+      "protocolId": "proto-fireworks-management-dt",
+      "kind": null,
+      "instructions": "### Step 1 Prepare a safe resting area away from windows; stay nearby and keep daily routines as normal as possible. If this is hard: Add masking sounds before events if your dog tolerates. ### Step 2 During fireworks, monitor stress signs (panting, hiding, vocalising); do not punish fear responses. If this is hard: Vet check if signs may be medical.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Worsening panic—professional desensitisation plan\nIf your dog panics, injures themselves, or stops eating, contact your vet and seek qualified behaviour support.",
+      "keywords": [
+        "fireworks",
+        "bangs",
+        "noise fear",
+        "thunder",
+        "scared of noises",
+        "safe space",
+        "routine",
+        "masking sounds",
+        "vet if health concerns",
+        "severe panic",
+        "self-injury",
+        "behaviourist/vet plan"
+      ],
+      "provenance": {
+        "protocolId": "proto-fireworks-management-dt",
+        "claimIds": [
+          "claim-dt-fireworks-002-safe-space",
+          "claim-dt-fireworks-001-signs"
+        ],
+        "sourceIds": [
+          "src-dt-fireworks-seasonal"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-reactive-management",
+      "title": "Help your reactive dog on walks",
+      "summary": "Create distance, keep the lead relaxed, reward calm—and get vet and behaviour support when needed.",
+      "advisory": true,
+      "advisoryMessage": "Management only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity.",
+      "protocolId": "proto-reactive-walk-management-dt",
+      "kind": null,
+      "instructions": "### Step 1 Identify triggers and choose quieter walk times/places; turn away or use visual barriers before your dog reaches threshold. If this is hard: Increase distance further; shorten walks. ### Step 2 Keep lead secure but relaxed; if trigger appears, create distance until your dog shows relaxation, then reward with food/praise/toy. If this is hard: U-turn earlier; use higher-value rewards. ### Step 3 Allow 48–72h recovery after major reactions before challenging walks; contact Dogs Trust Behaviour Support Line or ABTC professional for structured modification if needed. If this is hard: Temporary walk suspension with enrichment at home.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- Bites or imminent bite risk—management only with behaviourist/vet\nManagement only—not a treatment plan for aggression. See your vet first; use ABTC-registered help for ongoing reactivity.",
+      "keywords": [
+        "reactive",
+        "lunges",
+        "barks at dogs",
+        "lead reactivity",
+        "on lead barking",
+        "fear or frustration",
+        "pain or illness",
+        "learned habit",
+        "lead tension",
+        "create distance",
+        "reward calm",
+        "avoid telling off",
+        "keep lead relaxed"
+      ],
+      "provenance": {
+        "protocolId": "proto-reactive-walk-management-dt",
+        "claimIds": [
+          "claim-dt-reactive-003-create-distance-reward",
+          "claim-dt-reactive-002-vet-check-first",
+          "claim-dt-reactive-004-relaxed-lead",
+          "claim-dt-reactive-005-stress-recovery-window",
+          "claim-dt-reactive-006-behaviour-support-referral"
+        ],
+        "sourceIds": [
+          "src-dt-reactive-dog",
+          "src-dt-finding-behaviour-support"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-rescue-settling",
+      "title": "Help a rescue dog settle in",
+      "summary": "Go slowly, keep routines predictable, and get professional support if fear or aggression persists.",
+      "advisory": true,
+      "advisoryMessage": "Rescue dogs may need extra time and professional support—avoid overwhelming new environments.",
+      "protocolId": "proto-rescue-settling-dt",
+      "kind": null,
+      "instructions": "### Step 1 Keep routine predictable; allow your dog to approach people and novelty at their pace; reward calm exploration. If this is hard: Reduce visitors and walk length.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Persistent fear or aggression—ABTC referral\nRescue dogs may need extra time and professional support—avoid overwhelming new environments.",
+      "keywords": [
+        "rescue dog",
+        "newly adopted",
+        "settle in",
+        "rehomed",
+        "predictable routine",
+        "low pressure",
+        "professional support if fear persists"
+      ],
+      "provenance": {
+        "protocolId": "proto-rescue-settling-dt",
+        "claimIds": [
+          "claim-dt-rehome-001-patience"
+        ],
+        "sourceIds": [
+          "src-dt-rehoming-hub"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-adolescent-regression",
+      "title": "When your teenage dog regresses",
+      "summary": "Shorten sessions, revisit easy wins, and stay force-free through adolescent ups and downs.",
+      "advisory": true,
+      "advisoryMessage": "Teenage fear periods vary; reduce pressure and seek help if anxiety persists.",
+      "protocolId": "proto-adolescent-regression-mgmt",
+      "kind": null,
+      "instructions": "### Step 1 Shorten sessions; revisit foundation skills at easier criteria; avoid punishment for 'regression'. If this is hard: Pause new skills; focus on sleep and enrichment.",
+      "safetyNotes": "- Worsening fear—professional help\nTeenage fear periods vary; reduce pressure and seek help if anxiety persists.",
+      "keywords": [
+        "teenager",
+        "adolescent",
+        "regression",
+        "suddenly worse",
+        "fear period",
+        "adolescent regression",
+        "shorter sessions",
+        "stay force-free"
+      ],
+      "provenance": {
+        "protocolId": "proto-adolescent-regression-mgmt",
+        "claimIds": [
+          "claim-dt-adolescent-001-regression"
+        ],
+        "sourceIds": [
+          "src-dt-puppy-training-101"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-vet-handling-prep",
+      "title": "Get ready for the vet and grooming",
+      "summary": "Practise short touch-and-treat sessions at home, keep the order the same, and make the clinic a happy place.",
+      "advisory": true,
+      "advisoryMessage": "If your dog growls, snaps or avoids being handled, see your vet first to rule out pain, then ask for an accredited behaviourist.",
+      "protocolId": "proto-handling-vet-prep-dt",
+      "kind": null,
+      "instructions": "### Step 1 When you and your dog are both relaxed, touch a part of the body your dog already enjoys being touched for no more than three seconds, then give a treat. Keep sessions short and frequent. If this is hard: Shorten the touch or go back to a more comfortable area. ### Step 2 Slowly move to new areas, always in the same order, and use a cue such as 'let me see' before touching. Work towards paws, tail, ears and mouth, and build touch time gradually from three to ten seconds. Stop if your dog seems uncomfortable. If this is hard: Go back to the last area where your dog was relaxed and progress more slowly. ### Step 3 Practise in new quiet places and with other people, starting again from a gentle fuss each time. Drop in at the vet for treats and a fuss between appointments if your dog enjoys it, and bring a favourite toy or blanket. If this is hard: Make visits shorter and quieter, and go at your dog's pace.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Never tell your dog off for growling. It is a warning, so give them space and ask your vet and a qualified behaviourist for help.\n- If your dog tenses, growls or tries to move away, stop and ask your vet for help rather than pushing on.\nIf your dog growls, snaps or avoids being handled, see your vet first to rule out pain, then ask for an accredited behaviourist.",
+      "keywords": [
+        "vet visit",
+        "scared of the vet",
+        "grooming",
+        "handling",
+        "nail clipping",
+        "touch and treat",
+        "examination",
+        "same order each time",
+        "happy vet visits",
+        "pain or illness",
+        "fear of handling",
+        "see vet first"
+      ],
+      "provenance": {
+        "protocolId": "proto-handling-vet-prep-dt",
+        "claimIds": [
+          "claim-dt-vet-002-touch-treat-three-to-ten-seconds",
+          "claim-dt-handle-002-treat-same-order-generalise",
+          "claim-dt-handle-001-gradual-relaxed",
+          "claim-dt-handle-003-pain-vet-first",
+          "claim-dt-vet-003-speak-up-for-growl",
+          "claim-dt-vet-004-happy-visits-waiting-room"
+        ],
+        "sourceIds": [
+          "src-dt-how-to-handle",
+          "src-dt-happy-vet-visits"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-how-dogs-learn",
+      "title": "How dogs learn: rewards, markers and associations",
+      "summary": "Dogs repeat what pays off and link events that happen together, so reward the behaviour you want straight away and check what your dog is already being rewarded for.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-reward-use-fundamentals",
+      "kind": null,
+      "instructions": "### Step 1 Find rewards your dog really wants. Most dogs like food, toys and your attention, and some like a favourite game or a sniff. Use soft, smelly treats cut pea-sized for hard moments and plain biscuits for easy practice. If this is hard: Offer a few options and watch which your dog works for. ### Step 2 Give the reward during the behaviour or within about half a second afterwards so your dog links the two. If you use a marker such as 'yes' or a click, say it calmly at the right moment and always follow it with a reward, repeating the pairing around 20 times at the start. If this is hard: Practise the marker-then-treat pairing for longer before asking for anything. ### Step 3 When teaching something new, reward every success. Once your dog does it well in different places, reward every other time, then less often, mixing treats with praise and a fuss so your dog stays interested. If this is hard: Go back to rewarding every time if your dog stops trying. ### Step 4 Check what your dog is already being rewarded for. Attention, eye contact and being pushed away can all be rewards, so unwanted behaviour may continue even when you are telling the dog off. Ask for a calm behaviour and reward that instead. If this is hard: Pick one behaviour to watch for a day. ### Step 5 Keep it kind and clear: end each short session on a success, teach one cue at a time with short consistent words, ignore mistakes and reward the next correct try, and make sure everyone at home uses the same cues. Never shout at, hit or frighten your dog. If this is hard: Shorten the session and make the task easier.",
+      "safetyNotes": "- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop and give the dog a break if it seems worried, frustrated or tired.",
+      "keywords": [
+        "how dogs learn",
+        "rewards",
+        "treats",
+        "marker",
+        "clicker",
+        "positive reinforcement",
+        "why does my dog",
+        "reward timing"
+      ],
+      "provenance": {
+        "protocolId": "proto-reward-use-fundamentals",
+        "claimIds": [
+          "claim-dt-pr-001-definition",
+          "claim-bc-train-001-learn-by-association",
+          "claim-pdsa-rbt-001-timing-half-second",
+          "claim-dt-pr-004-unintentional-reinforcement",
+          "claim-dt-pr-002-continuous-reinforcement-new-skill",
+          "claim-dt-pr-003-marker-follow-reward",
+          "claim-dt-pr-005-raise-value-with-distractions",
+          "claim-dt-marker-001-charge-marker",
+          "claim-dt-marker-002-calm-marker-word",
+          "claim-bc-train-002-marker-pairing",
+          "claim-pdsa-rbt-002-golden-rules",
+          "claim-pdsa-rbt-003-no-punishment"
+        ],
+        "sourceIds": [
+          "src-dt-positive-reinforcement",
+          "src-dt-introducing-marker",
+          "src-bc-dog-puppy-training",
+          "src-pdsa-reward-based-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-equipment-and-law",
+      "title": "Kind equipment and the legal basics",
+      "summary": "Use a collar with an ID tag, a well-fitted harness and rewards; avoid prong, choke and shock devices, and check the current rules.",
+      "advisory": true,
+      "advisoryMessage": "Rules on shock collars differ across the UK and are under review in England, so check current rules; if your dog is worried by equipment or being handled, see your vet first.",
+      "protocolId": "proto-harness-and-equipment-basics",
+      "kind": null,
+      "instructions": "### Step 1 Put a collar with an identity tag on your dog and keep it on in public even if you walk in a harness. Make sure the microchip details are up to date. If this is hard: Ask your vet to check the microchip. ### Step 2 Choose a harness that does not cross directly over the shoulders and restrict movement. It should fit so you can slip a finger between strap and body and your dog cannot slip out. Check collar, harness and lead for wear regularly. If this is hard: Ask a pet shop or your vet to help with fit. ### Step 3 Introduce the harness slowly. Scatter treats around it, feed treats through the head hole, rest it loosely on the neck, let your dog hear the clips, then fasten it with treats. Go back a stage if your dog worries. If this is hard: Stay longer on the previous stage or stop for the day. ### Step 4 Keep to equipment that does not hurt or frighten. Prong collars, choke chains and shock collars rely on pain or fear, and welfare charities and vets advise against them. Teach loose lead walking with rewards instead, and check current rules because they are under review in England. If this is hard: Ask a qualified reward-based trainer to help.",
+      "safetyNotes": "- If training uses pain, fear, or equipment such as a choke or prong, switch to a reward-based professional.\n- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop if your dog seems worried by the harness or being handled; speak to your vet.\nRules on shock collars differ across the UK and are under review in England, so check current rules; if your dog is worried by equipment or being handled, see your vet first.",
+      "keywords": [
+        "harness",
+        "collar",
+        "id tag",
+        "microchip",
+        "prong collar",
+        "choke chain",
+        "shock collar",
+        "e-collar",
+        "head collar",
+        "equipment"
+      ],
+      "provenance": {
+        "protocolId": "proto-harness-and-equipment-basics",
+        "claimIds": [
+          "claim-dt-harness-001-choose-and-fit",
+          "claim-dog-002-collar-tag-microchip",
+          "claim-rspca-prong-001-harm-and-ineffective",
+          "claim-bva-ecollar-002-welfare-and-reward-based",
+          "claim-dt-harness-002-introduce-gradually",
+          "claim-govuk-001-microchip-8weeks",
+          "claim-rspca-prong-002-legal-but-alternatives",
+          "claim-bva-ecollar-001-uk-status",
+          "claim-hansard-ecollar-001-consult-2026",
+          "claim-dt-ll-002-no-aversive-kit"
+        ],
+        "sourceIds": [
+          "src-dt-harness-training",
+          "src-dog-ownership-guide",
+          "src-rspca-prong-collars",
+          "src-bva-shock-collars",
+          "src-dt-loose-lead",
+          "src-govuk-microchip",
+          "src-hansard-ecollars-2026"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-plan-and-measure",
+      "title": "Plan short sessions and track progress",
+      "summary": "Practise one skill at a time for a few minutes, add distraction slowly and keep a simple diary to see what is working.",
+      "advisory": false,
+      "advisoryMessage": null,
+      "protocolId": "proto-plan-and-measure-sessions",
+      "kind": null,
+      "instructions": "### Step 1 Pick one skill at a time and keep sessions short, about two to five minutes, practising little and often. Stop on a success. If this is hard: Cut the session shorter. ### Step 2 Start in a quiet place with few distractions, then move to places with more distraction only when your dog copes. If it cannot focus, go back to the earlier place for a while. If this is hard: Return to the quiet place. ### Step 3 Keep a simple diary. For each session write the date, skill, place, distractions, reward used and how it went. It shows progress and helps if you need to ask a trainer for help. If this is hard: Use a note on your phone. ### Step 4 Look back after a week or two. If a skill works at home but not outside, practise it in the in-between places. Ask a qualified trainer or your vet if progress stalls or your dog shows fear or aggression. If this is hard: Ask a reward-based trainer to review your diary.",
+      "safetyNotes": "- See your vet if pain or illness might be involved, and an ABTC-registered clinical behaviourist for aggression or severe fear.\n- Stop and rest if your dog loses interest or shows stress.",
+      "keywords": [
+        "training plan",
+        "session length",
+        "how long to train",
+        "training diary",
+        "progress",
+        "how often"
+      ],
+      "provenance": {
+        "protocolId": "proto-plan-and-measure-sessions",
+        "claimIds": [
+          "claim-bc-train-003-short-sessions-places",
+          "claim-rspca-brighton-001-diary-and-schedule",
+          "claim-pdsa-rbt-002-golden-rules"
+        ],
+        "sourceIds": [
+          "src-bc-dog-puppy-training",
+          "src-rspca-brighton-treats-markers",
+          "src-pdsa-reward-based-training"
+        ],
+        "reviewStatus": "auto_accepted_low_risk",
+        "lastVerified": "2026-10-10"
+      }
+    },
+    {
+      "lessonId": "lesson-alone-prevention",
+      "title": "Practise short times alone",
+      "summary": "Build brief separations with a food toy and calm returns. This is prevention for dogs who cope—not a treatment plan for separation anxiety.",
+      "advisory": true,
+      "advisoryMessage": "This is gradual alone-time practice for dogs who are coping. If your dog panics when left, do not keep lengthening absences—arrange care and speak to your vet or a behaviour professional.",
+      "protocolId": "proto-alone-prevention-dt",
+      "kind": null,
+      "instructions": "### Step 1 Use baby gate for brief visual separation; scatter treats or provide food toy before gate closes. If this is hard: Stay closer to gate; shorten duration. ### Step 2 Gradually increase time apart while owner in house, then very short departures with calm, low-key exits and returns. If this is hard: Reduce seconds away; use your dog sitter instead of stretching duration if anxiety present. ### Step 3 If the dog panics, stops coping, or already shows separation anxiety, stop lengthening absences. Arrange care so they are not left beyond what they can manage, and contact a vet or behaviour professional. This plan is prevention only—not a treatment programme. If this is hard: Use a sitter or company instead of practising departures.",
+      "safetyNotes": "- Do not leave beyond four-hour charity heuristic if avoidable\n- Any panic or injury risk—stop absences beyond threshold; contact behaviourist/vet\nThis is gradual alone-time practice for dogs who are coping. If your dog panics when left, do not keep lengthening absences—arrange care and speak to your vet or a behaviour professional.",
+      "keywords": [
+        "very gradual",
+        "food toy",
+        "shorten if stressed",
+        "calm exits and returns",
+        "stop beyond coping",
+        "arrange care",
+        "vet or behaviour professional",
+        "not a treatment plan"
+      ],
+      "provenance": {
+        "protocolId": "proto-alone-prevention-dt",
+        "claimIds": [
+          "claim-dt-alone-001-gradual",
+          "claim-dt-sa-001-avoid-alone",
+          "claim-dt-alone-002-no-tell-off",
+          "claim-dt-alone-003-four-hours"
+        ],
+        "sourceIds": [
+          "src-dt-time-alone",
+          "src-dt-separation-anxiety"
+        ],
+        "reviewStatus": "reviewed_pilot_export",
+        "lastVerified": "2026-10-10"
+      }
+    }
+  ],
+  "crashCourse": {
+    "courseId": "kindtrail-owner-crash-course-v1",
+    "title": "Owner crash course",
+    "schemaVersion": "1.1.0",
+    "generatedAt": "2026-10-10T17:32:14.001Z",
+    "parts": [
+      {
+        "id": "part-understand",
+        "order": 1,
+        "title": "Understand your dog",
+        "imdtAnalogue": "Theory course"
+      },
+      {
+        "id": "part-practise",
+        "order": 2,
+        "title": "Practise the skills",
+        "imdtAnalogue": "Practical course"
+      },
+      {
+        "id": "part-real-life",
+        "order": 3,
+        "title": "Real life and knowing your limits",
+        "imdtAnalogue": "Consultation, behaviour modification and professional boundaries"
+      }
+    ],
+    "stages": [
+      {
+        "id": "stage-how-dogs-learn",
+        "part": "part-understand",
+        "order": 1,
+        "title": "How dogs learn",
+        "aim": "Understand that dogs repeat what pays off and link events that happen together, so you can train with rewards on purpose.",
+        "lessons": [
+          {
+            "lessonId": "lesson-intro-marker",
+            "title": "Introduce a marker word",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-how-dogs-learn",
+            "title": "How dogs learn: rewards, markers and associations",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-read-your-dog",
+        "part": "part-understand",
+        "order": 2,
+        "title": "Read your dog",
+        "aim": "Notice stress signs in context so you can give space early and avoid pushing a worried dog.",
+        "lessons": [
+          {
+            "lessonId": "lesson-read-your-dog-stress",
+            "title": "Read stress signals",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-puppy-and-development",
+        "part": "part-understand",
+        "order": 3,
+        "title": "Puppies and growing up",
+        "aim": "Give a young dog good early experiences and keep calm through teenage ups and downs.",
+        "lessons": [
+          {
+            "lessonId": "lesson-puppy-socialisation",
+            "title": "Socialise your puppy safely",
+            "kind": "guide"
+          },
+          {
+            "lessonId": "lesson-mouthing-redirect",
+            "title": "Redirect mouthing and nipping",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-adolescent-regression",
+            "title": "When your teenage dog regresses",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-core-skills",
+        "part": "part-practise",
+        "order": 4,
+        "title": "Core skills",
+        "aim": "Teach attention, sit, down, a settle on a mat and a short stay, one small step at a time.",
+        "lessons": [
+          {
+            "lessonId": "lesson-name-attention",
+            "title": "Build name response",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-first-sit",
+            "title": "First sit with a lure",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-down-basics",
+            "title": "Teach down without forcing",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-settle-mat",
+            "title": "Settle on a mat",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-stay-basics",
+            "title": "Build a stay",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-hand-touch",
+            "title": "Teach your dog to touch your hand",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-spin-trick",
+            "title": "Teach your dog to spin",
+            "kind": "skill"
+          }
+        ]
+      },
+      {
+        "id": "stage-recall-and-lead",
+        "part": "part-practise",
+        "order": 5,
+        "title": "Coming back and walking nicely",
+        "aim": "Make coming back rewarding and keep the lead loose, using long lines until recall is reliable.",
+        "lessons": [
+          {
+            "lessonId": "lesson-recall-basics",
+            "title": "Build a reliable recall (basics)",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-emergency-recall",
+            "title": "Emergency recall practice",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-loose-lead",
+            "title": "Stop when the lead tightens",
+            "kind": "skill"
+          }
+        ]
+      },
+      {
+        "id": "stage-manners-and-management",
+        "part": "part-practise",
+        "order": 6,
+        "title": "Everyday manners",
+        "aim": "Swap jumping, grabbing and mouthing for behaviours you do want, and manage the setup while you teach.",
+        "lessons": [
+          {
+            "lessonId": "lesson-leave-it-basics",
+            "title": "Leave it — foundations",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-rspca-leave",
+            "title": "Teach leave (RSPCA method)",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-jumping-up",
+            "title": "Four paws on the floor",
+            "kind": "skill"
+          },
+          {
+            "lessonId": "lesson-steal-chase",
+            "title": "Stop the steal-and-chase game",
+            "kind": "guide"
+          },
+          {
+            "lessonId": "lesson-drop-it-swap",
+            "title": "Give things up with a fair trade",
+            "kind": "skill"
+          }
+        ]
+      },
+      {
+        "id": "stage-handling-and-vet",
+        "part": "part-practise",
+        "order": 7,
+        "title": "Handling, vet visits and muzzles",
+        "aim": "Make touch, the vet and (if needed) a muzzle predictable and pleasant, at your dog's pace.",
+        "lessons": [
+          {
+            "lessonId": "lesson-vet-handling-prep",
+            "title": "Get ready for the vet and grooming",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-behaviour-support",
+        "part": "part-real-life",
+        "order": 8,
+        "title": "When things are hard",
+        "aim": "Manage noise fear, lead reactivity and a new rescue dog without making things worse, and know when to ask for help.",
+        "lessons": [
+          {
+            "lessonId": "lesson-fireworks-management",
+            "title": "Help your dog through fireworks",
+            "kind": "guide"
+          },
+          {
+            "lessonId": "lesson-reactive-management",
+            "title": "Help your reactive dog on walks",
+            "kind": "guide"
+          },
+          {
+            "lessonId": "lesson-rescue-settling",
+            "title": "Help a rescue dog settle in",
+            "kind": "guide"
+          },
+          {
+            "lessonId": "lesson-alone-prevention",
+            "title": "Practise short times alone",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-ethics-equipment-law",
+        "part": "part-real-life",
+        "order": 9,
+        "title": "Kind methods, equipment and the law",
+        "aim": "Choose kind trainers and equipment, and know the basic UK legal duties.",
+        "lessons": [
+          {
+            "lessonId": "lesson-equipment-and-law",
+            "title": "Kind equipment and the legal basics",
+            "kind": "guide"
+          }
+        ]
+      },
+      {
+        "id": "stage-plan-and-measure",
+        "part": "part-real-life",
+        "order": 10,
+        "title": "Plan and measure your training",
+        "aim": "Pick one small goal, record how it goes, and move on only when the last step is solid.",
+        "lessons": [
+          {
+            "lessonId": "lesson-plan-and-measure",
+            "title": "Plan short sessions and track progress",
+            "kind": "guide"
+          }
+        ]
+      }
+    ],
+    "lessonExerciseMap": {
+      "lesson-intro-marker": "ex-reward-marker",
+      "lesson-name-attention": "ex-name-response",
+      "lesson-first-sit": "ex-sit-comfort",
+      "lesson-down-basics": "ex-down-comfort",
+      "lesson-settle-mat": "ex-mat-settle",
+      "lesson-stay-basics": "ex-wait-brief",
+      "lesson-hand-touch": "ex-kb-hand-touch",
+      "lesson-spin-trick": "ex-kb-spin-trick",
+      "lesson-recall-basics": "ex-recall-foundation",
+      "lesson-emergency-recall": "ex-kb-emergency-recall",
+      "lesson-loose-lead": "ex-lead-intro",
+      "lesson-leave-it-basics": "ex-leave-it-easy",
+      "lesson-rspca-leave": "ex-kb-rspca-leave",
+      "lesson-jumping-up": "ex-greeting-calm",
+      "lesson-drop-it-swap": "ex-kb-drop-it-swap",
+      "lesson-mouthing-redirect": "ex-puppy-mouthing"
+    },
+    "held": [
+      {
+        "lessonId": "lesson-loose-lead",
+        "goodDogExerciseId": "ex-lead-loose",
+        "protocolId": "proto-loose-lead-dt",
+        "reason": "hold_until_method_review",
+        "source": "src/lib/domains/dog-training/content/kb-import/good-dog-domain.json#held"
+      }
+    ]
+  },
+  "bundles": {
+    "guidesSchemaVersion": "1.1.0",
+    "guidesGeneratedAt": "2026-10-10T17:32:13.932Z",
+    "domainSchemaVersion": "1.1.0",
+    "domainGeneratedAt": "2026-10-10T17:32:13.830Z"
+  },
+  "aversivePatterns": [
+    {
+      "source": "\\bshock collar\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bchoke chain\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bprong\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\balpha roll\\b",
+      "flags": "i"
+    },
+    {
+      "source": "\\bhit(ting)?\\s+(your\\s+)?dog\\b",
+      "flags": "i"
+    }
+  ]
+}
